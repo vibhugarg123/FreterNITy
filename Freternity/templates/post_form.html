@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block head_extra %}
+    {{ form.media }}
+
+{% endblock head_extra %}
+{% block style %}
+    h1 {
+    color: #777777;
+    }
+    .wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    min-width: 100% !important;
+    }
+    div.vertical-line{
+      width: 1px;
+      background-color: darkgrey;
+      float: left;
+      border: 2px solid silver ;
+      border-radius: 0px;
+    }
+    .container-fluid{
+    background-color:slateblue;
+    }
+{% endblock style %}
+
+{% block content %}
+    <div class="container-fluid" style="border: 3px solid maroon;background-color: lightgray;margin-bottom: 1%;">
+        <div class='col-md-6 '>
+            <h1 style="text-align: center;"><b><u>POST-FORM</u></b></h1>
+
+            <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+                {{ form|crispy }}
+                <input type='submit' class='btn btn-primary btn-lg' value='Create Post' style="font-weight: bold;"/>
+            </form>
+        </div>
+
+        <div class='col-md-6'>
+            <div class="vertical-line" style="height: 130%;" ></div>
+            <h1 style="text-align: center;"><b><u>POST-PREVIEW</u></b></h1>
+            <div class='content-preview'>
+                <h3 id='preview-title'></h3>
+                <p id='preview-content'></p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block pagination %}
+    <div class="w3-bar"  style="color:white;background-color: black">
+    <h1>Open Blog | Learn & Share </h1>
+    <h3>You can post on any topic and any genre or mail us at g.vibhu05@gmail.com</h3>
+    <h4>Contact No: +91-88138-41486</h4>
+    </div>
+{% endblock pagination %}

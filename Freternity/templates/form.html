@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block style %}
+    h1 {
+    color: #777777;
+    }
+    .wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    min-width: 540px !important;
+    }
+    body{
+    background-color:white;
+    }
+{% endblock style %}
+
+
+{% block content %}
+    <div class='col-sm-6 col-sm-offset-3' style="height: 500%;" >
+        <h1><b>{{ title }}</b></h1>
+        <hr/>
+
+        <form method='POST' action='' enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type='submit' class='btn btn-default btn-lg' value='{{ title }}' />
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,328 @@
+{% load staticfiles %}
+<!--DOCTYPE html -->
+<html>
+<head>
+    <title>{% block head_title %}NIT Kurukshetra Uer Portal {% endblock head_title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' >
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href="../static/css/base.css">
+
+
+    <style>
+        h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+        body {font-family: "Open Sans"}
+
+
+        footer { background-color:darkslateblue; min-height:350px; font-family: 'Open Sans', sans-serif; }
+        .footerleft { margin-top:50px; padding:0 36px; }
+        .logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
+
+        .footerleft p { color:#fff; font-size:12px !important; font-family: 'Open Sans', sans-serif; margin-bottom:15px;}
+        .footerleft p i { width:20px; color:#999;}
+
+
+        .paddingtop-bottom {  margin-top:50px;}
+        .footer-ul { list-style-type:none;  padding-left:0px; margin-left:2px;}
+        .footer-ul li { line-height:29px; font-size:12px;}
+        .footer-ul li a { color:#a0a3a4; transition: color 0.2s linear 0s, background 0.2s linear 0s; }
+        .footer-ul i { margin-right:10px;}
+        .footer-ul li a:hover {transition: color 0.2s linear 0s, background 0.2s linear 0s; color:#ff670f; }
+
+        .social:hover {
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -o-transform: scale(1.1);
+        }
+        .icon-ul { list-style-type:none !important; margin:0px; padding:0px;}
+        .icon-ul li { line-height:75px; width:100%; float:left;}
+        .icon { float:left; margin-right:5px;}
+        .copyright { min-height:40px; background-color:#000000;}
+        .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;}
+        .heading7 { font-size:21px; font-weight:700; color:#d9d6d6; margin-bottom:22px;}
+        .post p { font-size:12px; color:#FFF; line-height:20px;}
+        .post p span { display:block; color:#8f8f8f;}
+        .bottom_ul { list-style-type:none; float:right; margin-bottom:0px;}
+        .bottom_ul li { float:left; line-height:40px;}
+        .bottom_ul li:after { content:"/"; color:#FFF; margin-right:8px; margin-left:8px;}
+        .bottom_ul li a { color:#FFF;  font-size:12px;}
+     {% block style %}{% endblock style %}
+    </style>
+
+    {% block head_extra %} {% endblock head_extra %}
+</head>
+
+<body>
+
+<!--Navigation Bar-->
+<div class="w3-top">
+  <div class="w3-bar w3-indigo">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="w3-bar-item w3-button"><i class="fa fa-facebook-official fa-2x"></i></a>
+    <a href="https://twitter.com/home?status={{ request.build_absolute_uri }}" class="w3-bar-item w3-button"><i class="fa fa-twitter fa-2x"></i></a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}" class="w3-bar-item w3-button"><i class="fa fa-linkedin fa-2x"></i></a>
+
+    <a href="{% url "home" %}" class="w3-bar-item w3-button" style="text-decoration: none;"><i class="fa fa-home fa-2x"></i><h3 style="display: inline;"> Home</h3></a>
+
+
+    {% if not request.user.is_authenticated %}
+        <a href="{% url "register" %}" class="w3-bar-item w3-button pull-right"><i class="fa fa-user fa-2x"><h3 style="display: inline;">&nbsp;Sign Up</h3></i></a>
+        <a href="{% url "login" %}" class="w3-bar-item w3-button pull-right"><i class="fa fa-sign-in fa-2x"><h3 style="display: inline;">&nbsp;Log In</h3></i></a>
+    {% else %}
+
+        <a href="{% url "logout" %}" class="w3-bar-item w3-button pull-right"><i class="fa fa-sign-out fa-2x"></i><h3 style="display: inline;">&nbsp;Logout</h3></a>
+    {% endif %}
+  </div>
+</div>
+<!--Navigation Bar Ends-->
+
+<!--For Facebook Plugings-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!--For Facebook Plugings End-->
+
+
+<!--{% include "messages_display.html" %}-->
+{% block search %}{% endblock search %}
+{% block slideshow %}{% endblock slideshow %}
+{% block delete_thread %}
+{% endblock delete_thread %}
+<div class="container-fluid">
+    <div class="row"> <!-- Give this div your desired background color -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style="margin-top: 80px;">
+                    {% block content %}{% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block pagination %}{% endblock pagination %}
+<!--footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 footerleft ">
+                <div class="logofooter">Our Motive </div>
+                <p>Open Blog | Learn & Share </p>
+                <p>It's an approach where people of all age-groups can share their knowledge with the world as well as gain information from the world.
+                    Our purpose it to provide information possibly in every domain and in every genre.
+                    Log In and Join with us!
+                </p>
+                <p><i class="fa fa-map-pin"></i> Room No-385, Hostel-9, Indivar Bhawan, NIT Kurukshetra,Thanesar,Haryana -        136119, INDIA</p>
+                <p><i class="fa fa-phone"></i> Phone (India) : +91 88138-41486</p>
+                <p><i class="fa fa-envelope"></i> E-mail : g.vibhu05@gmail.com</p>
+            </div>
+            <div class="col-md-2 col-sm-6 paddingtop-bottom">
+                <h6 class="heading7">GENERAL LINKS</h6>
+                <ul class="footer-ul">
+                    <li><a href="{% url "home" %}"><h3>Home</h3></a>
+
+                    {% if not request.user.is_authenticated %}
+                        <li><a href="{% url "login" %}"><h3>Log In</h3></a></li>
+                        <li><a href="{% url "register" %}"><h3>Sign Up</h3></a></li>
+                    {% else %}
+                        <li><a href="{% url "logout" %}"><h3>Logout</h3></a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 paddingtop-bottom">
+                <h6 class="heading7">Famous Bloggers</h6>
+                <div class="post">
+                    <ul class="w3-ul w3-hoverable w3-white">
+                        <li class="w3-padding-16">
+                            <img src="https://www.theartof.com/assets/images/speaker-headshots/large/GaryVaynerchuk.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                            <span class="w3-large"><a href="http://www.garyvaynerchuk.com/" style="text-decoration: none;"><b>Gary Vaynerchuk</b></a></span><br/>
+                        </li>
+                        <li class="w3-padding-16">
+                            <img src="https://pearanalytics.com/wp-content/uploads/2010/03/rand-fishkin.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                            <span class="w3-large"><a href="https://moz.com/" style="text-decoration: none;"><b>Meet Rand Fishkin</b></a></span><br/>
+                        </li>
+                        <li class="w3-padding-16">
+                            <img src="http://stmedia.startribune.com/images/ows_147702089241216.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px;">
+                            <span class="w3-large"><a href="https://www.smartpassiveincome.com/" style="text-decoration: none;"><b>Meet Pat Flynn</b></a></span><br/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--footer start from here-->
+<div class="copyright">
+    <div class="container">
+        <div class="col-md-6">
+            <p>© 2017 - All Rights with Vibhu Garg</p>
+        </div>
+    </div>
+</div>
+
+<!-- Latest compiled and minified JavaScript -->
+<script   src="http://code.jquery.com/jquery-1.12.2.min.js"   integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk="   crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js'></script>
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}
+        x[myIndex-1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".content-markdown").each(function(){
+            var content = $(this).text()
+            var markedContent = marked(content)
+            $(this).html(markedContent)
+        })
+        $(".post-detail-item img").each(function(){
+            $(this).addClass("img-responsive");
+        })
+
+        // preview-content
+        var contentInput = $("#id_content");
+        function setContent(value){
+            var markedContent = marked(value)
+            $("#preview-content").html(markedContent)
+            $("#preview-content img").each(function(){
+                $(this).addClass("img-responsive")
+            })
+        }
+        setContent(contentInput.val())
+        contentInput.keyup(function(){
+            var newContent = $(this).val()
+            setContent(newContent)
+        })
+
+
+        // preview-title
+        var titleInput = $("#id_title");
+
+        function setTitle(value) {
+            $("#preview-title").text(value)
+        }
+        setTitle(titleInput.val())
+        titleInput.keyup(function(){
+            var newContent = $(this).val()
+            setTitle(newContent)
+        })
+
+        $(".comment-reply-btn").click(function(event){
+            event.preventDefault();
+            $(this).parent().next(".comment-reply").fadeToggle();
+        })
+})
+</script>
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+</body>
+</html>
